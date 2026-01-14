@@ -125,7 +125,6 @@ export const WorkflowEditor: React.FC = () => {
     const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
     const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
     const [showSaveDialog, setShowSaveDialog] = useState(false);
-    const [workflowErrors, setWorkflowErrors] = useState<string[]>([]);
     const [selectedNode, setSelectedNode] = useState<Node | null>(null);
     const reactFlowInstance = useRef<ReactFlowInstance | null>(null);
 
@@ -427,16 +426,6 @@ export const WorkflowEditor: React.FC = () => {
                 {/* Workflow Canvas */}
                 <Box flexGrow="1" style={{ minHeight: "600px" }}>
                     <Card style={{ overflow: "hidden", height: "100%" }}>
-                        {workflowErrors.length > 0 && (
-                            <Callout.Root color="red" size="1" mb="2">
-                                <Callout.Icon>
-                                    <AlertCircle />
-                                </Callout.Icon>
-                                <Callout.Text>
-                                    Workflow Errors: {workflowErrors.join(", ")}
-                                </Callout.Text>
-                            </Callout.Root>
-                        )}
                         <ReactFlow
                             nodes={nodes}
                             edges={edges}

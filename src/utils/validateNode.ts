@@ -5,7 +5,7 @@ import { ValidationError } from "@/components/WorkflowEditor";
 
 import { validateApiNode } from "./validateApiNode";
 import { validateConditionalNode } from "./validateConditionalNode";
-import { validateFormNode } from "./validateFromNode";
+import { validateFormNode } from "./validateFormNode";
 
 export interface ValidationResult {
     isValid: boolean;
