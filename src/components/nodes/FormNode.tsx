@@ -1,36 +1,36 @@
-import React from 'react';
-import { Handle, Position } from '@xyflow/react';
-import { FileText, X } from 'lucide-react';
-import { Box, Text, Flex, IconButton } from '@radix-ui/themes';
+import React from "react";
+import { Handle, Position } from "@xyflow/react";
+import { FileText, X } from "lucide-react";
+import { Box, Text, Flex, IconButton } from "@radix-ui/themes";
 
 /**
  * Represents a single field in a form
  */
 export interface FormField {
-  id: string;
-  name: string;
-  label: string;
-  type: 'string' | 'number' | 'dropdown' | 'checkbox';
-  required: boolean;
-  options?: string[]; // For dropdown type
+    id: string;
+    name: string;
+    label: string;
+    type: "string" | "number" | "dropdown" | "checkbox";
+    required: boolean;
+    options?: string[]; // For dropdown type
 }
 
 /**
  * Data structure for the Form node
  */
 export interface FormNodeData {
-  label: string;
-  customName?: string;
-  fields?: FormField[];
-  onDelete?: () => void;
+    label: string;
+    customName?: string;
+    fields?: FormField[];
+    onDelete?: () => void;
 }
 
 /**
  * Props for the FormNode component
  */
 export interface FormNodeProps {
-  data: FormNodeData;
-  id: string;
+    data: FormNodeData;
+    id: string;
 }
 
 /**
@@ -38,85 +38,85 @@ export interface FormNodeProps {
  * Collects data from users through configurable fields
  */
 export const FormNode: React.FC<FormNodeProps> = ({ data, id }) => {
-  return (
-    <Box
-      px="4"
-      py="3"
-      position="relative"
-      style={{
-        backgroundColor: 'var(--blue-9)',
-        color: 'white',
-        borderRadius: 'var(--radius-3)',
-        boxShadow: 'var(--shadow-2)',
-        border: '2px solid var(--blue-10)',
-        minWidth: '150px',
-      }}
-    >
-      {/* Delete button */}
-      {data.onDelete && (
+    return (
         <Box
-          position="absolute"
-          style={{
-            top: '-8px',
-            right: '-8px',
-          }}
-        >
-          <IconButton
-            size="1"
-            color="red"
-            variant="solid"
-            radius="full"
-            onClick={(e) => {
-              e.stopPropagation();
-              data.onDelete?.();
-            }}
-            title="Delete node"
+            px="4"
+            py="3"
+            position="relative"
             style={{
-              width: '20px',
-              height: '20px',
-              padding: 0,
-              border: '2px solid white',
+                backgroundColor: "var(--blue-9)",
+                color: "white",
+                borderRadius: "var(--radius-3)",
+                boxShadow: "var(--shadow-2)",
+                border: "2px solid var(--blue-10)",
+                minWidth: "150px",
             }}
-          >
-            <X size={12} />
-          </IconButton>
+        >
+            {/* Delete button */}
+            {data.onDelete && (
+                <Box
+                    position="absolute"
+                    style={{
+                        top: "-8px",
+                        right: "-8px",
+                    }}
+                >
+                    <IconButton
+                        size="1"
+                        color="red"
+                        variant="solid"
+                        radius="full"
+                        onClick={(e) => {
+                            e.stopPropagation();
+                            data.onDelete?.();
+                        }}
+                        title="Delete node"
+                        style={{
+                            width: "20px",
+                            height: "20px",
+                            padding: 0,
+                            border: "2px solid white",
+                        }}
+                    >
+                        <X size={12} />
+                    </IconButton>
+                </Box>
+            )}
+
+            <Handle
+                type="target"
+                position={Position.Left}
+                style={{
+                    width: "12px",
+                    height: "12px",
+                    backgroundColor: "var(--blue-10)",
+                    border: "2px solid white",
+                }}
+            />
+
+            <Flex align="center" gap="2" justify="center" mb="2">
+                <FileText size={16} />
+                <Text size="2" weight="bold">
+                    {data.customName || data.label}
+                </Text>
+            </Flex>
+
+            <Text size="1" align="center" style={{ opacity: 0.9 }}>
+                {data.fields && data.fields.length > 0
+                    ? `${data.fields.length} field${data.fields.length !== 1 ? "s" : ""}`
+                    : "Click to add fields"}
+            </Text>
+
+            <Handle
+                type="source"
+                position={Position.Right}
+                style={{
+                    width: "12px",
+                    height: "12px",
+                    backgroundColor: "var(--blue-10)",
+                    border: "2px solid white",
+                }}
+            />
         </Box>
-      )}
-
-      <Handle
-        type="target"
-        position={Position.Left}
-        style={{
-          width: '12px',
-          height: '12px',
-          backgroundColor: 'var(--blue-10)',
-          border: '2px solid white',
-        }}
-      />
-
-      <Flex align="center" gap="2" justify="center" mb="2">
-        <FileText size={16} />
-        <Text size="2" weight="bold">
-          {data.customName || data.label}
-        </Text>
-      </Flex>
-
-      <Text size="1" align="center" style={{ opacity: 0.9 }}>
-        {data.fields && data.fields.length > 0
-          ? `${data.fields.length} field${data.fields.length !== 1 ? 's' : ''}`
-          : 'Click to add fields'}
-      </Text>
-
-      <Handle
-        type="source"
-        position={Position.Right}
-        style={{
-          width: '12px',
-          height: '12px',
-          backgroundColor: 'var(--blue-10)',
-          border: '2px solid white',
-        }}
-      />
-    </Box>
-  );
+    );
 };
