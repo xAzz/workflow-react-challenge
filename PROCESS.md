@@ -87,7 +87,16 @@ Both node-level & workflow-level validation return the same result shape, which 
 - Block saving or execution when invalid
 - Surface clear, targeted feedback in the UI
 
-The goal is for validation to be predictable, easy to extend, & easy to reason about as the workflow grows.
+The goal is for validation to be predictable, easy to extend & easy to reason about as the workflow grows.
 
 ## Trade-offs / what I’d improve
 One trade off is that validateNode currently casts from Record<string, unknown> to specific node data types. It’s fine given the controlled environment, but long term I’d enforce stricter typing at the node creation level so we don’t rely on casts. Also if more node types get added, I’d probably switch to a map-based registry instead of a switch statement, but for 3 node types a switch is clean & readable.
+
+## Final Notes
+Given the time constraints of the take-home, some decisions were made to prioritise clarity & correctness over deeper abstraction or optimisation.
+
+I did use minor AI assistance (Cursor) in a very limited way to sanity check parts of the implementation & unblock myself late in the process.
+
+All logic was reviewed, understood & adapted by me. Nothing was copypasted blindly.
+
+Given more time, I’d continue refining typing, making validation easier to extend in the future & adding unit tests, but I intentionally avoided over-engineering for a take-home context.
